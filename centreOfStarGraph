@@ -1,0 +1,31 @@
+// There is an undirected star graph consisting of n nodes labeled from 1 to n. A star graph is a graph where there is one center node and exactly n - 1 edges that connect the center node with every other node.
+
+// You are given a 2D integer array edges where each edges[i] = [ui, vi] indicates that there is an edge between the nodes ui and vi. Return the center of the given star graph.
+
+
+class Solution {
+public:
+    int findCenter(vector<vector<int>>& edges) {
+        int n = 0,i,result = 0;
+        for(int i=0;i<edges.size();i++){
+            n = max(n,max(edges[i][1],edges[i][0]));
+        }
+        
+        vector<int>indegree(n+1);
+        
+        for(i=0;i<edges.size();i++){
+            indegree[edges[i][0]]++;
+            indegree[edges[i][1]]++;
+            
+        }
+        
+        for(i=0;i<indegree.size();i++){
+            if(indegree[i] == n-1){
+                result = i;
+                break;
+            }
+            
+        }
+        return result;
+    }
+};
